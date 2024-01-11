@@ -112,8 +112,8 @@ In your HTML page you reference the script or CSS file using an absolute path. E
 
 ### Entity classes
 As the entity classes are required by all developers, they should all be located in the package 
-```at.spengergasse.mex_px.entities```
+```at.spengergasse.med_px.entities```
 
 ### Other Java classes
-Create a sub-package for all your other Java classes in the package at.spengergasse.mex_px.
+Create a sub-package for all your other Java classes in the package at.spengergasse.med_px.
 This should contain all your classes (controllers, repostiories, ...) except entities.
