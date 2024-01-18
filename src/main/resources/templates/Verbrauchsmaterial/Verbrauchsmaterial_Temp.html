@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verbrauchsmaterial Verwaltung</title>
+  <th:block th:insert="~{masterpage/masterpage :: assets}"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/Verbrauchsmaterial/styles.css">
+</head>
+
+<body>
+<div th:replace="~{/masterpage/masterpage :: menu}"/>
+<h1>Verbrauchsmaterialen Verwaltung</h1>
+<form id="material-form">
+  <div class="form-group">
+    <label for="material-name">Material Name:</label>
+    <input type="text" id="material-name" name="material-name" required>
+  </div>
+  <div class="form-group">
+    <label for="material-quantity">Menge:</label>
+    <input type="number" id="material-quantity" name="material-quantity" required>
+  </div>
+  <div class="form-group">
+    <label for="material-description">Beschreibung:</label>
+    <textarea id="material-description" name="material-description" rows="4" required></textarea>
+  </div>
+  <div class="form-group">
+    <label for="material-category">Kategorie:</label>
+    <select id="material-category" name="material-category" required>
+      <option value="elektronik">Elektronik</option>
+      <option value="bürobedarf">Medizinbücher</option>
+      <option value="werkzeug">OPWerkzeuge</option>
+      <!-- Add more categories as needed -->
+    </select>
+  </div>
+  <button type="submit">Hinzufügen</button>
+
+  <h2>Materialien Liste</h2>
+  <ul id="material-list">
+  </ul>
+  <script src="/Verbrauchsmaterial/Verbrauchsmaterial_Temp.js" defer></script>
+</form>
+</body>
+</html>
