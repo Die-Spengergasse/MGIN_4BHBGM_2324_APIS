@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerät hinzufügen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+  <script>
+    let sendbtn = document.querySelector("#submit")
+    const table = document.getElementById("newGeraet");
+    const tbody = table.getElementsByTagName("tbody");
+    const headerRow = table.querySelector("thead tr");
+    //Array
+    //const gereate = [];
+
+    //Beim Laden/Neuladen den LocalStorae abfragen und die Daten ausgeben die gespeichert sind
+    window.addEventListener("load", function() {
+      updateColumnCount();
+      const savedData = JSON.parse(localStorage.getItem("gespeicherteDaten")) || [];
+      const table = document.getElementById("newGeraet");
+
+      for (const data of savedData) {
+        const newRow = table.insertRow(-1);
+        const cell1 = newRow.insertCell(0);
+        const cell2 = newRow.insertCell(1);
+        const cell3 = newRow.insertCell(2);
+        const cell4 = newRow.insertCell(3);
+        const cell5 = newRow.insertCell(4);
+        const cell6 = newRow.insertCell(5);
+        const cell7 = newRow.insertCell(6);
+
+        cell1.innerHTML = data.nameFull;
+        cell2.innerHTML = data.nameShort;
+        cell3.innerHTML = data.weight;
+        cell4.innerHTML = data.lenght;
+        cell5.innerHTML = data.width;
+        cell6.innerHTML = data.height;
+        cell7.innerHTML = data.use;
+      }
+    });
+
+
+    sendbtn.addEventListener("click" , function(e) {
+      e.preventDefault();
+
+      //console.log("Erfolgreich")
+
+      //Werte lesen und in einer Variable speichern
+      const nameFull = document.querySelector("#GeraetenameFull").value;
+      const nameShort = document.querySelector("#GeraetenameShort").value;
+      const weight = document.querySelector("#gewicht").value;
+      const lenght = document.getElementById("OP").value;
+      const width = document.querySelector("#breite").value;
+      const height = document.querySelector("#hoehe").value;
+      const use = document.getElementById("select").value;
+
+
+      const table = document.getElementById("newGeraet");
+      const newRow = table.insertRow(-1);
+      const cell1 = newRow.insertCell(0);
+      const cell2 = newRow.insertCell(1);
+      const cell3 = newRow.insertCell(2);
+      const cell4 = newRow.insertCell(3);
+      const cell5 = newRow.insertCell(4);
+      const cell6 = newRow.insertCell(5);
+      const cell7 = newRow.insertCell(6);
+
+
+      cell1.innerHTML = nameFull;
+      cell2.innerHTML = nameShort;
+      cell3.innerHTML = weight;
+      cell4.innerHTML = lenght;
+      cell5.innerHTML = width;
+      cell6.innerHTML = height;
+      cell7.innerHTML = use;
+
+
+
+      //in LocalStorage speichern
+      const savedData = JSON.parse(localStorage.getItem("gespeicherteDaten")) || [];
+      savedData.push({ nameFull, nameShort, weight, lenght, width, height, use});
+      localStorage.setItem("gespeicherteDaten", JSON.stringify(savedData));
+
+
+      //IN DER CONSOLE AUSGEBEN
+      //Objekt
+      // const newgereat = {
+
+      //   Name: nameFull,
+      //   Bezeichnung: nameShort,
+      //   Gewicht: weight,
+      //   Länge: lenght,
+      //   Breite: width,
+      //   Höhe: height,
+      //   Wirkung: use
+
+      // };
+
+      // let resultsection = document.querySelector("#Result");
+
+
+
+      // //Array übergeben
+      // gereate.push(newgereat);
+
+      // //In der Console ausgeben
+      // console.log(gereate)
+
+    })
+
+    function updateColumnCount() {
+
+
+      const columnCount = headerRow.children.length;
+      document.getElementById("columnCount").textContent = columnCount;
+    }
+
+    function deleteAllRows() {
+
+      while (tbody.firstChild) {
+        tbody.deleteRow(tbody.firstChild);
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
+
+
+
+    body {
+      margin: 100px;
+      padding: 0;
+      /*display: flex;*/
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+
+    }
+
+    .mycontainer {
+      text-align: left;
+      margin-top: 0;
+    }
+
+    .mycard {
+
+      width: 850px; /* Breite Ihrer Karte */
+
+      background-color: #f0efef; /* Hintergrundfarbe Ihrer Karte */
+      border: 1px solid #e9e6e6; /* Rahmen um Ihre Karte */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Schatteneffekt */
+      padding: 20px; /* Innenabstand der Karte */
+      border-radius: 15px;
+      position: relative;
+    }
+    input{
+      width: 100%;
+      padding: 10px;
+      border-color: #f7f5f5;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      font-family: 'Poppins' , sans-serif;
+    }
+    button{
+      width: 25%;
+      padding: 10px;
+      margin-bottom: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+      border-radius: 20px;
+
+      font-family: 'Poppins' ,sans-serif;
+    }
+
+    h1{
+      font-family: 'Poppins' , sans-serif;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: row; /* Ändern Sie die Anordnung der Buttons auf nebeneinander */
+      /* Weitere Stile für den Button-Container */
+    }
+    #butwhy{
+      top: 10px;
+      right: 20px;
+      position: absolute;
+      padding: 5px 10px;
+      width: 10px;
+    }
+    @media (max-width: 768px) {
+      .card {
+        max-width: 300px; /* Anpassen der Breite für kleinere Bildschirme */
+      }
+    }
+    a{
+      font-size: 12px;
+      display: flex;
+      margin-right: 10px;
+    }
+    table{
+      background-color: whitesmoke;
+      border: 3px solid black;
+
+    }
+    th{
+      border: 2px solid black;
+      border-radius: 5px;
+      background-color: lightblue;
+    }
+    tr{
+      border: 1px solid black;
+      border-radius: 5px;
+
+    }
+
+  </style>
+</head>
+<body>
+<div class="mycontainer">
+  <div class="mycard">
+
+    <h1 class=" mb-4 text-center">Gerät hinzufügen</h1>
+    <div class="mb-3">
+      <input type="text" class="form-control" id="GeraetenameFull" placeholder="Gerätename (ausgeschrieben):">
+    </div>
+    <div class="mb-3">
+
+      <input type="text" class="form-control" id="GeraetenameShort" placeholder="Gerätename (kurz):">
+    </div>
+    <div class="mb-2">
+      <input type="number" class="form-control" id="gewicht" placeholder="Gewicht in kg:">
+    </div>
+    <div class="mb-2">
+      <input type="number" class="form-control" id="laenge" placeholder="Länge in cm:">
+      <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+        <label id="OP" style="font-family: 'Poppins' ,sans-serif; color: rgb(95, 95, 95)" class="btn btn-outline-primary" for="btnradio1">OP-Saal</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <label style="font-family: 'Poppins' ,sans-serif; color: rgb(95, 95, 95);" class="btn btn-outline-primary" for="btnradio2">Raum 1</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+        <label style="font-family: 'Poppins' ,sans-serif; color: rgb(95, 95, 95);" class="btn btn-outline-primary" for="btnradio3">Raum 2</label>
+      </div>
+    </div>
+    <div class="mb-2">
+      <label style="font-family: 'Poppins';" for="date">Anschaffung</label>
+      <input type="date" class="form-control" id="date" placeholder="Datum der Anschaffung:">
+    </div>
+    <div class="mb-2">
+
+      <input type="number" class="form-control" id="hoehe" placeholder="Höhe in cm:">
+    </div>
+    <select style="font-family: 'Poppins' , sans-serif;" id="select" class="form-select" aria-label="Default select example">
+      <option selected>choose a Wirkungsweise</option>
+      <option value="Röntgenstrahlen">Röntgenstrahlen</option>
+      <option value="Audio">Audio</option>
+      <option value="haptisch">haptisch</option>
+    </select>
+
+    <div class="mb-3 form-check">
+
+    </div>
+    <div class="button-container">
+      <button style="font-family: 'Poppins' , sans-serif;" onclick="" id="submit" type="submit" class="btn btn-primary">Submit</button>
+      <button style="font-family: 'Poppins' , sans-serif;" onclick="deleteAllRows()" type="submit" class="btn btn-primary">Tabelle löschen</button>
+
+    </div>
+    <p style="font-family: 'Poppins' ,sans-serif;">Geräte: <span id="columnCount">0</span></p>
+
+
+
+    <div>
+      <ul id="Result"></ul>
+    </div>
+
+    <table style="font-family: 'Poppins'  ,sans-serif;" id="newGeraet">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Name - kurz</th>
+        <th>Gewicht</th>
+        <th>Länge</th>
+        <th>Breite</th>
+        <th>Höhe</th>
+        <th>Wirkungsweise</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Hier werden die Zeilen mit Werten eingefügt -->
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+
+</html>
