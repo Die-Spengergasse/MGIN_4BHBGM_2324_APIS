@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arztpraxissystem</title>
+    <th:block th:insert="~{masterpage/masterpage :: assets}"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .btn-primary,
+        .btn-danger,
+        .btn-success {
+            margin-right: 10px;
+        }
+
+        table {
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            text-align: center;
+        }
+
+        thead {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tbody {
+            background-color: #e9ecef;
+        }
+
+        .btn-group {
+            margin-top: 10px;
+        }
+    </style>
+
+    <script type="module">
+        const array = [];
+
+        document.querySelector("#reservieren").addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const reservation = {};
+            reservation.arzt = document.querySelector("#selectArzt").value;
+            reservation.patient = document.querySelector("#selectPatient").value;
+            reservation.raum = document.querySelector("#selectRaum").value;
+            reservation.termin = document.querySelector("#selectTermin").value;
+
+            array.push(reservation);
+
+            // Save reservations to JSON file
+            saveToJsonFile(array);
+
+            const tableBody = document.querySelector("tbody");
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <th scope="row">${array.length}</th>
+                <td>${reservation.arzt}</td>
+                <td>${reservation.patient}</td>
+                <td>${reservation.raum}</td>
+                <td>${reservation.termin}</td>
+                <td><button class="btn btn-danger" onclick="deleteReservation(${array.length - 1})">Löschen</button></td>
+            `;
+            tableBody.appendChild(newRow);
+
+            // Clear the form after adding the reservation
+            document.querySelector("form").reset();
+        });
+
+        function deleteReservation(index) {
+            array.splice(index, 1); // Remove reservation from the array
+            updateTable(); // Update the table
+            saveToJsonFile(array); // Update JSON file after deletion
+        }
+
+        function updateTable() {
+            const tableBody = document.querySelector("tbody");
+            tableBody.innerHTML = ""; // Clear the existing table rows
+
+            array.forEach(function (item, index) {
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <th scope="row">${index + 1}</th>
+                    <td>${item.arzt}</td>
+                    <td>${item.patient}</td>
+                    <td>${item.raum}</td>
+                    <td>${item.termin}</td>
+                    <td><button class="btn btn-danger" onclick="deleteReservation(${index})">Löschen</button></td>
+                `;
+                tableBody.appendChild(newRow);
+            });
+
+            // Update JSON file after modifications
+            saveToJsonFile(array);
+        }
+
+        function saveToJsonFile(data) {
+            const jsonData = JSON.stringify(data, null, 2);
+            console.log(jsonData);
+            // You can use this data to save it to a file on the server or perform other actions
+        }
+    </script>
+
+</head>
+
+<body>
+<div th:replace="~{/masterpage/masterpage :: menu}"/>
+<div class="container">
+    <h1 class="mt-4">Arztpraxissystem - Raum reservieren</h1>
+    <form>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="selectArzt">Arzt auswählen</label>
+                    <select class="form-control" id="selectArzt">
+                        <option>Arzt 1</option>
+                        <option>Arzt 2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="selectPatient">Patient auswählen</label>
+                    <select class="form-control" id="selectPatient">
+                        <option>Patient 1</option>
+                        <option>Patient 2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="selectRaum">Raum auswählen</label>
+                    <select class="form-control" id="selectRaum">
+                        <option>Raum 1</option>
+                        <option>Raum 2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="selectTermin">Termin auswählen</label>
+                    <select class="form-control" id="selectTermin">
+                        <option>Termin 1</option>
+                        <option>Termin 2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" name="reservieren" id="reservieren"
+                           value="Reservieren">
+                    <input type="submit" class="btn btn-danger" value="Löschen">
+                    <input type="submit" class="btn btn-success" value="Aktualisieren">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Arzt</th>
+                        <th scope="col">Patient</th>
+                        <th scope="col">Raum</th>
+                        <th scope="col">Termin</th>
+                        <th scope="col">Aktionen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>
