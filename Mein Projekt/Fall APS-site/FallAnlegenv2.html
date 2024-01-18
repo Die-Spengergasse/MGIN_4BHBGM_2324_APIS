@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Patienten und Fälle</title>
+</head>
+
+<body>
+    <label for="patienten">Wählen Sie einen Patienten:</label>
+    <input list="patienten" id="patientenListe" name="patienten" onchange="zeigeFaelle(this.value)">
+    <datalist id="patienten">
+        <!-- Patienten werden dynamisch eingefügt -->
+    </datalist>
+
+    <label for="faelle">Wählen Sie einen Fall:</label>
+    <input list="faelle" id="fallListe" name="faelle" onchange="zeigeFallDetails(this.value)">
+    <list id="faelle">
+        <!-- Fälle werden dynamisch eingefügt -->
+    </list>
+
+    <div id="fallDetails">
+        <!-- Fall-Details werden hier angezeigt -->
+    </div>
+
+</body>
+<script src="JavaSkriptv2.js"></script>
+</html>

@@ -1,0 +1,57 @@
+### Get all patients
+GET http://localhost:8080/api/patients/all
+
+### Get patient by id
+GET http://localhost:8080/api/patients/1
+
+### Get patient by name
+GET http://localhost:8080/api/patients/searchname/Patient%201
+
+### Add a new patient
+POST http://localhost:8080/api/patients/addpatient
+Content-Type: application/json
+
+{
+  "id": 5,
+  "name": "Patient 6"
+}
+
+### Update a patient
+PUT http://localhost:8080/api/patients/updatepatient/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updated Patient 2"
+}
+
+### Delete a patient
+DELETE http://localhost:8080/api/patients/deletepatient/Patient%203
+
+
+###
+POST http://localhost:8080/1/addfall
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Testfall"
+}
+
+###
+PUT http://localhost:8080/updateFall/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Aktualisierter Testfall"
+}
+
+###
+GET http://localhost:8080/alleFaelle
+
+###
+GET http://localhost:8080/getfall/1
+
+###
+DELETE http://localhost:8080/deleteFall/1

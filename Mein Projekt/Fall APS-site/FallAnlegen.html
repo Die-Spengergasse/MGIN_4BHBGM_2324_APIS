@@ -1,0 +1,97 @@
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FallAnlegen</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="JavaSkriptv2.js"></script>
+</head>
+
+<body>
+    <div>
+        <h2>Patienten DataList</h2>
+
+        <form method="post">
+            <label for="patienten">Wählen Sie einen Patienten:</label>
+            <input list="patienten" name="patientenInput" id="patientenInputID" onchange="showCases(this.value)">
+
+            <datalist id="patienten">
+            </datalist>
+
+            <div id="caseList">
+
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Date field and button -->
+    <div>
+        <p>
+            <button onclick='addCase()'>Neuer Fall hinzufügen</button>
+            <button onclick='deleteFall()'>Fall löschen</button>
+            <button onclick='saveInLocalStorage()'>Im lokalen Spiecher spiechern</button>
+        </p>
+        <!-- Case name field and button -->
+        <p>
+            <!-- Case name field -->
+            <label for="caseNameField">Fallname:</label>
+            <input type='text' id='caseNameField'>
+        </p>
+        <p>
+            <!-- Date field -->
+            <label for="dateField">Datum:</label>
+            <input type='date' id='dateField'>
+        </p>
+        <p>
+            <!-- Doctor dropdown -->
+            <label for="doctorField">Arzt:</label>
+            <select id='doctorField'>
+                <option value="">--Wählen Sie einen Arzt--</option>
+                <option value="Arzt 1">Arzt 1</option>
+                <option value="Arzt 2">Arzt 2</option>
+                <option value="Arzt 3">Arzt 3</option>
+            </select>
+        </p>
+        <p>
+            <!-- Description field -->
+            <label for="descriptionField">Beschreibung:</label>
+            <textarea id='descriptionField'></textarea>
+        </p>
+        <!-- Status radio button -->
+        <p>
+            <!-- Status field -->
+            <label>Status:</label><br />
+            Offen<input type='radio' name='status' id='statusOpen'>
+            In Bearbeitung<input type='radio' name='status' id='statusInProgress'>
+            Geschlossen<input type='radio' name='status' id='statusClosed'>
+        </p>
+        <!-- Completion date field and button -->
+        <p>
+            <!-- Completion date field -->
+            <label for="completionDateField">Abschlussdatum:</label>
+            <input type='date' id='completionDateField'>
+        </p>
+        <!-- Billed checkbox and button -->
+        <p>
+            <!-- Billed checkbox -->
+            Abgerechnet<input type='checkbox' id='billedCheckbox'>
+        </p>
+         <!-- Update the Case -->
+        <p>
+            <button onclick="updateCase()">Änderungen speichern</button>
+        </p>
+    </div>
+
+    <div class="content">
+
+        <footer>
+            <p>All rights reversed.</p>
+            <p>© Copyright by Manuel</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>

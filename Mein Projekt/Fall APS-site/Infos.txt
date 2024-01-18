@@ -1,0 +1,4 @@
+Ein Patient mehrere Fälle (DataListe für die Patienten )
+bei einem Besuch wird ein Fall geüffnet
+
+Datum, Name (Knieschmerzen z.b.), welcher Arzt hat ihn geöffnet, Beschreibung, Status, Abschlussdatum, Abgerechnet
