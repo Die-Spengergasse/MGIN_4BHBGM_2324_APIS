@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patientenformular</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #879fb8;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 20px;
+        }
+
+        #patientForm {
+            width: 60%;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #patientForm label {
+            font-weight: bold;
+        }
+
+        #patientForm input[type="text"],
+        #patientForm input[type="date"],
+        #patientForm select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        #patientForm button {
+            background-color: #879fb8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .patient-list {
+            width: 40%;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .patient-list h2 {
+            font-size: 18px;
+            margin-top: 0;
+        }
+
+        .patient-list table {
+            width: 100%;
+        }
+
+        .patient-list th, .patient-list td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .patient-list th {
+            background-color: #879fb8;
+            color: white;
+        }
+
+        .patient-list tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Patientformular</h1>
+    
+    <div class="container">
+        <div id="patientForm">
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br>
+
+                <label for="surname">Surname:</label>
+                <input type="text" id="surname" name="surname" required><br>
+
+                <label>Gender:</label>
+                <br>
+                <input type="radio" id="male" name="gender" value="Männlich">
+                <label for="male">male</label><br>
+
+                <input type="radio" id="female" name="gender" value="Weiblich">
+                <label for="female">female</label><br>
+
+                <input type="radio" id="inter" name="gender" value="Inter">
+                <label for="inter">inter</label><br>
+                <br>
+
+                <label for="ssn">SSN:</label>
+                <input type="text" id="ssn" inputmode="numeric" pattern="[0-9]*" title="Bitte geben Sie nur Zahlen ein" required name="ssn"><br>
+
+                <label for="birthday">Birthday:</label>
+                <input type="date" id="birthday" name="birthday"><br>
+
+                <label for="healthInsurance">Health Insurance:</label>
+                <select id="healthInsurance" name="healthInsurance" size="1">
+                    <option value="" disabled selected>Select...</option>
+                    <option value="OEGK">ÖGK</option>
+                    <option value="SVS">SVS</option>
+                    <option value="BVAEB">BVAEB</option>
+                </select>
+
+                <button type="button" id="saveButton">Save</button>
+            </form>
+        </div>
+
+        <div class="patient-list">
+            <h2>Patientlist</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Birthday</th>
+                        <th>Action</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="patientList">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        var patients = [];
+
+        // Function to add a patient and update the list
+        function addPatient() {
+            // Get values from form fields
+            var name = document.getElementById("name").value;
+            var surname = document.getElementById("surname").value;
+            var gender = document.querySelector('input[name="gender"]:checked').value;
+            var ssn = document.getElementById("ssn").value;
+            var birthday = document.getElementById("birthday").value;
+            var healthInsurance = document.getElementById("healthInsurance").value;
+
+            // Check if it's a new patient or an editing patient
+            var editedPatient = patients.find(function (patient) {
+                return patient.editing === true;
+            });
+
+            if (editedPatient) {
+                // Update the data if it's an editing patient
+                editedPatient.name = name;
+                editedPatient.surname = surname;
+                editedPatient.gender = gender;
+                editedPatient.ssn = ssn;
+                editedPatient.birthday = birthday;
+                editedPatient.healthInsurance = healthInsurance;
+                editedPatient.editing = false;
+            } else {
+                // It's a new patient
+                var newPatient = {
+                    id: patients.length + 1,
+                    name: name,
+                    surname: surname,
+                    gender: gender,
+                    ssn: ssn,
+                    birthday: birthday,
+                    healthInsurance: healthInsurance,
+                    editing: false
+                };
+
+                // Add the new patient to the array
+                patients.push(newPatient);
+            }
+
+            // Update the patient list
+            updatePatientList();
+
+            // Reset the form
+            document.getElementById("name").value = "";
+            document.getElementById("surname").value = "";
+            document.querySelector('input[name="gender"]:checked').checked = false;
+            document.getElementById("ssn").value = "";
+            document.getElementById("birthday").value = "";
+            document.getElementById("healthInsurance").value = "";
+
+            // Save the updated data to local storage
+            savePatientsToLocalStorage();
+        }
+
+        // Function to update the patient list
+        function updatePatientList() {
+            var patientList = document.getElementById("patientList");
+            // Clear the current content of the patient list
+            patientList.innerHTML = "";
+
+            // Loop through the patient array and add each patient to the list
+            patients.forEach(function (patient) {
+                var row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${patient.id}</td>
+                    <td>${patient.name}</td>
+                    <td>${patient.surname}</td>
+                    <td>${patient.birthday}</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="editPatient(${patient.id})">Edit</button>
+
+                       
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" onclick="removePatient(${patient.id})">X</button>
+                    </td>
+                `;
+                patientList.appendChild(row);
+            });
+        }
+
+        // Function to edit a patient
+        function editPatient(id) {
+            // Find the patient with the specified ID
+            var patientToEdit = patients.find(function (patient) {
+                return patient.id === id;
+            });
+
+            if (patientToEdit) {
+                // Fill the form with the data of the patient to edit
+                document.getElementById("name").value = patientToEdit.name;
+                document.getElementById("surname").value = patientToEdit.surname;
+                document.querySelector('input[name="gender"][value="' + patientToEdit.gender + '"]').checked = true;
+                document.getElementById("ssn").value = patientToEdit.ssn;
+                document.getElementById("birthday").value = patientToEdit.birthday;
+                document.getElementById("healthInsurance").value = patientToEdit.healthInsurance;
+
+                // Mark the edited patient for update
+                patientToEdit.editing = true;
+            }
+
+            // Update the patient list
+            updatePatientList();
+        }
+
+// Function to remove a patient and renumber the IDs
+function removePatient(id) {
+    // Find the index of the patient to remove
+    var indexToRemove = patients.findIndex(function (patient) {
+        return patient.id === id;
+    });
+
+    if (indexToRemove !== -1) {
+        // Remove the patient from the array
+        patients.splice(indexToRemove, 1);
+
+        // Renumber the IDs of the remaining patients
+        for (var i = 0; i < patients.length; i++) {
+            patients[i].id = i + 1;
+        }
+
+        // Update the patient list
+        updatePatientList();
+
+        // Remove the data of the removed patient from local storage
+        savePatientsToLocalStorage();
+    }
+}
+
+        // Function to save patient data to local storage
+        function savePatientsToLocalStorage() {
+            // Convert the patient array to a JSON format
+            var patientsJSON = JSON.stringify(patients);
+
+            // Store the JSON in local storage
+            localStorage.setItem("patientData", patientsJSON);
+        }
+
+        // Function to load patient data from local storage
+        function loadPatientsFromLocalStorage() {
+            var patientsJSON = localStorage.getItem("patientData");
+
+            if (patientsJSON) {
+                // Convert the JSON to a JavaScript array
+                patients = JSON.parse(patientsJSON);
+
+                // Update the patient list
+                updatePatientList();
+            }
+        }
+
+        // Add a click event listener to the "Save" button
+        document.getElementById("saveButton").addEventListener("click", addPatient);
+
+        // Load patient data from local storage when the page loads
+        loadPatientsFromLocalStorage();
+    </script>
+</body>
+</html>
