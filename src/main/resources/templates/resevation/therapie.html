@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+	<head>
+		<title>Physikalische Therapie</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<header>
+			<h1>Physikalische Therapie</h1>
+		</header>
+		<main>
+			<section id="therapiearten">
+				<h2>Was wir anbieten:</h3>
+				<ul>
+					<li>Physiotherapie</li>
+					<li>Massage-Therapie</li>
+					<li>Ultraschalltherapie</li>
+					<li>Elektrotherapie</li>
+					<li>Aquatische Therapie</li>
+				</ul>
+			</section>
+			<section id="booking">
+				<form>
+					<section>
+						<label  for="firstname">Vorname: </label>
+						<input id="firstname" type="text" name="firstname">
+					</section>
+					<section>
+						<label  for="lastname">Nachname: </label>
+						<input id="lastname" type="text" name="lastname">
+					</section>
+					<section>
+						<label  for="svn">SVN: </label>
+						<input id="svn" type="text" name="svn">
+					</section>
+					<section>
+						<label for="geburtstag">Geburtstag: </label>
+						<input type="date" id="geburtstag" name="geburtstag">
+					</section>		
+					<section>
+						<label for="Therapie">Therapie: </label>
+						<select>
+							<option selected="selected" disabled >Bitte ausw&auml;hlen</option>
+							<option>Physiotherapie</option>
+							<option>Massage-Therapie</option>
+							<option>Ultraschalltherapie</option>
+							<option>Elektrotherapie</option>
+							<option>Aquatische Therapie</option>
+						</select>
+					</section>
+					<input type="button" id="sendButton"  value="Speichern" />
+				</form>
+			</section>
+			<section id="comments">
+				<h2>Arzt Kommentar</h3>
+				<section id="doctorComment">
+					<form id="comment">
+						<textarea type="text" rows="3"></textarea>
+						<button type="submit">Kommentieren</button>
+					</form>
+				</section>
+			</section>
+		<main>	
+			<div  id="formResult">
+
+			</div>
+	</body>
+	<script>
+
+		// Erstellen Sie ein leeres Array, um die ausgegebenen Daten zu speichern
+        let dataArray = [];
+
+		// referenz auf das inputfeld <input type="button" ...
+		let sendButton = document.querySelector("#sendButton");
+		
+		
+		// auf einen buttonklick reagieren
+		sendButton.addEventListener("click", function () {
+        console.log("senden button geklickt")
+
+		 // formulardaten auslesen
+		 let firstNameField = document.querySelector("#firstname");
+        let lastNameField = document.querySelector("#lastname");
+		let svnField = document.querySelector("#svn");
+		let geburtstagField = document.querySelector("#geburtstag");
+		
+		// Ausgegebene Daten in einem Objekt speichern
+		let outputData = {
+        FirstName: firstNameField.value,
+        LastName: lastNameField.value,
+        SVN: svnField.value,
+        Geburtstag: geburtstagField.value
+		
+		};
+
+		
+	    // Ausgegebene Daten dem Array hinzufügen
+        dataArray.push(outputData);
+
+
+		
+        // console.log("FirstName: " + firstNameField.value + "<br/>")
+        console.log(`FirstName: ${firstNameField.value}, LastName: ${lastNameField.value}, SVN: ${svnField.value} Geburtstag: ${geburtstagField.value}`)
+		
+		 // Ausgegebene Daten anzeigen
+		 let formResultSection = document.querySelector('#formResult');
+         formResultSection.innerHTML = `Die ausgegebenen Daten sind: 
+        <pre>${JSON.stringify(outputData, null, 2)}</pre>
+		<span>FirstName: ${outputData.FirstName}</span>
+		`;
+
+
+    console.log("Daten wurden dem Array hinzugefügt:", dataArray);
+});
+	</script>
+</html>
