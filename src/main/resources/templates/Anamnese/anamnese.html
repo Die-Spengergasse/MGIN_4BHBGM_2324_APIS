@@ -8,7 +8,45 @@
 <body>
     <div th:replace="~{/masterpage/masterpage :: menu}"/>
 
-    <h1>Mal schauen... </h1>
+    <h1>Anamnese</h1>
+     Patient auswählen
+            <select id="patient" name="patient">
+                <option value="patient1">Patient 1</option>
+                <option value="patient2">Patient 2</option>
+                <option value="patient3">Patient 3</option>
+                <!-- Weitere Patienten hinzufügen -->
+            </select><br><br>
+
+            <label for="temperatur">Körpertemperatur:</label>
+            <span id="temperaturAnzeige">min: 35°C - max. 42°C</span><br>
+            <input type="range" id="temperatur" name="temperatur" min="35" max="42" step="0.1" oninput="updateTemperatureValue()">
+
+            <label for="beschwerdenDauer">Wie lange dauern die Beschwerden an?</label>
+            <input type="date" id="beschwerdenDauer" name="beschwerdenDauer"><br><br>
+
+            <label for="anmerkungen">Anmerkungen:</label><br>
+            <textarea id="anmerkungen" name="anmerkungen" rows="4" cols="50"></textarea><br>
+
+            <label>Schmerzen?</label><br>
+            <label for="ja">Ja</label>
+            <input type="radio" id="ja" name="schmerzen" value="ja">
+            <label for="nein">Nein</label>
+            <input type="radio" id="nein" name="schmerzen" value="nein"><br>
+            <input type="button" value="Daten speichern" id="sendbutton">
+
+            <table class= "table">
+                <!--forumular Ergebnisse in einer Tabelle-->
+                <thead>
+                    <th>Patient</th>
+                    <th>Schmerzen</th>
+                    <th>Temperatur</th>
+                    <th>Beginn Beschwerde</th>
+                    <th>Anmerkungen</th>
+                </thead>
+                <tbody id="data"></tbody>
+            </table>
+
+    <script src="/Anamnese/anamnese.js"></script>
     <section th:replace="~{/masterpage/masterpage :: footer}"/>
 </body>
 </html>
