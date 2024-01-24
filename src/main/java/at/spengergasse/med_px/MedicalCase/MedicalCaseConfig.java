@@ -1,4 +1,4 @@
-package at.spengergasse.med_px.users.ext_tools;
+package at.spengergasse.med_px.MedicalCase;
 
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
