@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width, initial-scale=1.0">
+    <title>Diagnose Formular</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+    <h1>Diagnose-Formular</h1>
+    <form>
+        <div>
+            <label for="patientenname">Patientenname:</label>
+            <input type="text" id="patientenname" name="patientenname" placeholder="Name des Patienten." list="patientenvorschlaege">
+            <datalist id="patientenvorschlaege">
+                <option value="Mark">
+                <option value="Max">
+                <option value="Marius">
+                <option value="Maria">
+                <option value="Melanie">
+                <option value="Michael">
+            </datalist>
+        </div>
+
+        <div>
+            <label for="gebdat">Geburtstagsdatum:</label>
+            <input type="date" id="gebdat" name="gebdat">
+        </div>
+
+        <div>
+            <label for="behandelnderarzt">Behandelnder Arzt:</label>
+            <select id="behandelnderarzt" name="behandelnderarzt">
+                <option value="dr-mustermann">Dr. Mustermann</option>
+                <option value="dr-musterfrau">Dr. Musterfrau</option>
+                <option value="dr-doe">Dr. Doe</option>
+                <option value="dr-smith">Dr. Smith</option>
+                <option value="dr-johnson">Dr. Johnson</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="diagnosedatum">Diagnosedatum:</label>
+            <input type="date" id="diagnosedatum" name="diagnosedatum">
+        </div>
+
+        <div>
+            <label for="diagnose">Diagnose:</label>
+            <select id="diagnose" name="diagnose" >
+                <option value="herzkrankheit">Herzkrankheit</option>
+                <option value="diabetes">Diabetes</option>
+                <option value="hypertonie">Hypertonie</option>
+                <option value="migräne">Migräne</option>
+                <option value="andere">Andere</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="symptome">Symptome:</label><br>
+            <textarea id="symptome" name="symptome" placeholder="Schreiben Sie hier bitte auffällige Symptome des Patienten auf." rows="4" cols="50"></textarea>
+        </div>
+
+        <div>
+            <label for="behandlung">Behandlung:</label><br>
+            <textarea id="behandlung" name="behandlung" placeholder="Bitte notieren Sie hier die durchgeführten Behandlungen und Therapiemaßnahmen." rows="4" cols="50"></textarea>
+        </div>
+
+        <div>
+            <label for="bemerkungen">Bemerkungen:</label><br>
+            <textarea id="bemerkungen" name="bemerkungen" placeholder="Bitte hinterlassen Sie hier Ihre fachlichen Beobachtungen und Anmerkungen zum Patienten." rows="4" cols="50"></textarea>
+        </div>
+
+        <div>
+            <input type="button" id="speichernButton" value="Diagnose speichern">
+        </div>
+    </form>
+    <footer>
+        <div class="footer-copyright">
+            &copy; 2023 HTL Spengergasse. Alle Rechte vorbehalten.
+        </div>
+    </footer>
+</body>
+<script>
+    const diagnoseArray = []; // Das Array für die Diagnosen
+
+    // Event-Handler-Funktion, die aufgerufen wird, wenn der Button geklickt wird
+    document.getElementById('speichernButton').addEventListener('click', function () {
+        // Die eingegebenen Daten aus dem Formular auslesen
+        const patientenname = document.getElementById('patientenname').value;
+        const gebdat = document.getElementById('gebdat').value;
+        const behandelnderarzt = document.getElementById('behandelnderarzt').value;
+        const diagnosedatum = document.getElementById('diagnosedatum').value;
+        const diagnose = document.getElementById('diagnose').value;
+        const symptome = document.getElementById('symptome').value;
+        const behandlung = document.getElementById('behandlung').value;
+        const bemerkungen = document.getElementById('bemerkungen').value;
+
+        // Ein JavaScript-Objekt mit den ausgelesenen Daten erstellen
+        const diagnoseObj = {
+            patientenname,
+            gebdat,
+            behandelnderarzt,
+            diagnosedatum,
+            diagnose,
+            symptome,
+            behandlung,
+            bemerkungen
+        };
+
+        // Das erstellte Objekt dem Array hinzufügen
+        diagnoseArray.push(diagnoseObj);
+
+        // Das Array in der Konsole ausgeben
+        console.log(diagnoseArray);
+    });
+</script>
+</html>
