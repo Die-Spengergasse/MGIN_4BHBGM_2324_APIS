@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
+  <meta charset="UTF-8">
   <title>Medizinische Dokumente verwalten</title>
 </head>
 <body>
 <h1>Medizinische Dokumente verwalten</h1>
 
-<form action="speichern.php" method="post" enctype="multipart/form-data">
+<form action="SpeichernServlet" method="post" enctype="multipart/form-data">
+  <input type="hidden" id="dokument_id" name="dokument_id" value="">
+
   <label for="patientenname">Patientenname:</label>
   <input type="text" id="patientenname" name="patientenname" required><br>
 
