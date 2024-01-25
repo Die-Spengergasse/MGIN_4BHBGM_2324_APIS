@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Symptome</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            text-align: left;
+            color: #333;
+            font-family: Arial, sans-serif;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        h2 {
+            color: #573b70;
+        }
+
+        p {
+            color: #333;
+        }
+
+        #patientTable {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+
+        #patientTable th, #patientTable td {
+            padding: 8px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #patientTable th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+        form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="patientForm">
+        <h2>Patientendaten</h2>
+        <div class="form-group row">
+            <label for="vorname" class="col-sm-2 col-form-label">Vorname</label>
+            <div class="col-sm-10">
+                <input type="text" id="vorname" placeholder="Vorname">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="nachname" class="col-sm-2 col-form-label">Nachname</label>
+            <div class="col-sm-10">
+                <input type="text" id="nachname" placeholder="Nachname">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="svnr" class="col-sm-2 col-form-label">SVNR</label>
+            <div class="col-sm-10">
+                <input type="text" id="svnr" placeholder="Sozialversicherungsnummer">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="tel" class="col-sm-2 col-form-label">Telefonnummer</label>
+            <div class="col-sm-10">
+                <input type="text" id="tel" placeholder="Telefonnummer">
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <select id="inputGeschlecht" class="form-select">
+                <option value="" selected disabled>Bitte Geschlecht auswählen</option>
+                <option value="Weiblich">Weiblich</option>
+                <option value="Männlich">Männlich</option>
+                <option value="Divers">Divers</option>
+            </select>
+        </div>
+    </form>
+
+    <form>
+        <div class="col-auto">
+            <h2>Symptome</h2>
+            <select id="inputSymptome" class="form-select">
+                <option value="" selected disabled>Bitte die vorhandenen Symptome auswählen</option>
+                <option value="Fieber">Fieber</option>
+                <option value="Übelkeit">Übelkeit</option>
+                <option value="Schwellungen">Schwellungen</option>
+                <option value="Rötungen">Rötungen</option>
+                <option value="Durchfall">Durchfall</option>
+                <option value="Verstopfung">Verstopfung</option>
+                <option value="Husten">Husten</option>
+                <option value="Gliedschmerzen">Gliedschmerzen</option>
+                <option value="Kopfschmerzen">Kopfschmerzen</option>
+                <option value="Atembeschwerden">Atembeschwerden</option>
+            </select>
+        </div>
+    </form>
+
+    <form>
+        <h2>Datum</h2>
+        <div class="form-group">
+            <label for="vonDatum">Von:</label>
+            <input type="date" id="vonDatum">
+        </div>
+        <div class="form-group">
+            <label for="bisDatum">Bis:</label>
+            <input type="date" id="bisDatum">
+        </div>
+    </form>
+
+    <form>
+        <h2>Notwendigkeit</h2>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="notwendigkeit" id="Schwer" checked>
+            <label class="form-check-label" for="Schwer">
+                Schwer
+            </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="notwendigkeit" id="Mittel">
+            <label class="form-check-label" for="Mittel">
+                Mittel
+            </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="notwendigkeit" id="Leicht">
+            <label class="form-check-label" for="Leicht">
+                Leicht
+            </label>
+        </div>
+    </form>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="button" class="btn btn-primary" id="hinzufuegenButton">Hinzufügen und Ausgeben</button>
+        </div>
+    </div>
+
+    <table id="patientTable">
+        <thead>
+            <tr>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>SVNR</th>
+                <th>Telefonnummer</th>
+                <th>Geschlecht</th>
+                <th>Symptome</th>
+                <th>VonDatum</th>
+                <th>BisDatum</th>
+                <th>Notwendigkeit</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script defer>
+        // Initialisiere das Array mit Personen
+        const persons = [];
+    
+        // Funktion zum Rendern der Tabelle
+        function renderTable() {
+            const patientTableBody = document.querySelector("#patientTable tbody");
+    
+            // Leere den aktuellen Inhalt der Tabelle
+            patientTableBody.innerHTML = "";
+    
+            // Füge jede Person als Zeile in die Tabelle ein
+            for (const [index, p] of persons.entries()) {
+                const row = patientTableBody.insertRow();
+    
+                // Füge Zellen für jede Person hinzu
+                row.insertCell().innerText = p.vorname;
+                row.insertCell().innerText = p.nachname;
+                row.insertCell().innerText = p.svnr;
+                row.insertCell().innerText = p.tel;
+                row.insertCell().innerText = p.geschlecht;
+                row.insertCell().innerText = p.symptome;
+                row.insertCell().innerText = p.vondatum;
+                row.insertCell().innerText = p.bisdatum;
+                row.insertCell().innerText = p.notwendigkeit;
+    
+                // Füge Bearbeiten- und Löschen-Buttons hinzu
+                const editBtn = document.createElement("button");
+                editBtn.innerText = "Edit";
+                editBtn.addEventListener('click', () => editPerson(index));
+                row.insertCell().appendChild(editBtn);
+    
+                const deleteBtn = document.createElement("button");
+                deleteBtn.innerText = "Delete";
+                deleteBtn.addEventListener('click', () => deletePerson(index));
+                row.insertCell().appendChild(deleteBtn);
+            }
+        }
+    
+        // Funktion zum Bearbeiten einer Person
+        function editPerson(index) {
+            // Hier kannst du den Bearbeitungscode implementieren
+            alert("Edit person at index: " + index);
+        }
+    
+        // Funktion zum Löschen einer Person
+        function deletePerson(index) {
+            // Hier kannst du den Löschcode implementieren
+            persons.splice(index, 1); // Entferne die Person aus dem Array
+            renderTable(); // Aktualisiere die Tabelle
+        }
+    
+        // Funktion zum Hinzufügen und Ausgeben
+        function hinzufuegenUndAusgeben() {
+            // Hier kannst du den Code zum Hinzufügen von Personen implementieren
+            const vorname = document.getElementById("vorname").value;
+            const nachname = document.getElementById("nachname").value;
+            const svnr = document.getElementById("svnr").value;
+            const tel = document.getElementById("tel").value;
+            const geschlecht = document.getElementById("inputGeschlecht").value;
+            const symptome = document.getElementById("inputSymptome").value;
+            const vondatum = document.getElementById("vonDatum").value;
+            const bisdatum = document.getElementById("bisDatum").value;
+            const notwendigkeit = document.querySelector('input[name="notwendigkeit"]:checked').id;
+    
+            persons.push({ vorname, nachname, svnr, tel, geschlecht, symptome, vondatum, bisdatum, notwendigkeit });
+            renderTable(); // Aktualisiere die Tabelle
+        }
+    
+        // Füge einen Event Listener zum Hinzufügen-Button hinzu
+        document.getElementById("hinzufuegenButton").addEventListener('click', hinzufuegenUndAusgeben);
+    
+        // Initialisiere die Tabelle beim Laden der Seite
+        renderTable();
+    </script>
+</body>
+
+</html>
