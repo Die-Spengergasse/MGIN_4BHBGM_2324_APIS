@@ -42,10 +42,12 @@
                 <!--------------- menu items for all users (public) ---------------->
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/pub/welcome">Home</a></li>
+                    <li><a href="/doctor/WorkIncapacity">Work Incapacity</a></li>
                 </ul>
                 <!--------------- menu items for admins ---------------->
                 <ul class="nav navbar-nav" sec:authorize="hasRole('ADMIN')">
                     <li><a href="/admin/users">Users</a></li>
+                    <li><a href="/admin/WorkIncapacity">Work Incapacity</a></li>
                 </ul>
                 <!--------------- menu items for doctors ---------------->
                 <ul class="nav navbar-nav" sec:authorize="hasRole('DOCTOR')">
@@ -70,7 +72,7 @@
     <section class="navbar navbar-fixed-bottom" th:fragment="footer">
         <div class="container-fluid">
             <hr/>
-            <h2>&copy; 4AHBGM</h2>
+            <h2>&copy; 4BHBGM</h2>
         </div>
     </section>
 

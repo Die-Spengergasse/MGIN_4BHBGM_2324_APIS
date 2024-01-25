@@ -1,0 +1,9 @@
+.btn-sm {
+    width: 100%;
+    box-sizing: border-box; /* Berücksichtigt Padding und Border in der Breite */
+    margin-bottom: 5px; /* Optional: Fügt etwas Abstand zwischen den Buttons hinzu */
+}
+
+th {
+    vertical-align: top;
+}
