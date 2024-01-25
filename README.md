@@ -9,7 +9,18 @@ The page ```/resources/templates/users/users.html``` shows how this works.
 
 ## Adding new functionality
 In order to realize a project with many contributors with as little chaos as possible, 
-it is necessary that everyone adheres to a few rules. 
+it is necessary that everyone adheres to a few rules.
+
+Here you can see the basic structure of the project:
+
+![file structure](file_structure.png)
+
+Put your java classes in a sub package of ```at.spengergasse.mex_px```.
+
+Put your HTML pages in a subfolder of ```resources/templates```.
+
+Put static resources (scripts, stylesheets, ...) in a subfolder of ```resources/static```.
+
 
 ### HTML pages
 The Thymeleaf mechanism works in such a way that HTML pages must be located in the ```resources/templates``` folder.
@@ -101,8 +112,8 @@ In your HTML page you reference the script or CSS file using an absolute path. E
 
 ### Entity classes
 As the entity classes are required by all developers, they should all be located in the package 
-```at.spengergasse.mex_px.entities```
+```at.spengergasse.med_px.entities```
 
 ### Other Java classes
-Create a sub-package for all your other Java classes in the package at.spengergasse.mex_px.
+Create a sub-package for all your other Java classes in the package at.spengergasse.med_px.
 This should contain all your classes (controllers, repostiories, ...) except entities.

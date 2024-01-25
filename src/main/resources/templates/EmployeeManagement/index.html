@@ -1,0 +1,81 @@
+<html lang="de-at">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mitarbeiter verwalten</title>
+  <link rel="stylesheet" href="../../static/EmployeeManagement/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <th:block th:insert="~{masterpage/masterpage :: assets}"/>
+</head>
+
+<body>
+<div th:replace="~{/masterpage/masterpage :: menu}"/>
+  <div class="contanier">
+    <div class="card">
+      <div>
+        <div class="mb-3">
+          <label for="inputmitarbeiternr" class="form-label">Mitarbeiter Nummer:</label>
+          <input type="number" class="form-control" id="inputmitarbeiternr" placeholder="Mitarbeiternummer">
+        </div>
+        <button type="submit" class="btn btn-primary">Akzeptieren</button>
+        <div class="mb-3">
+          <label for="inputmitarbeitername" class="form-label">Mitarbeiter Name</label>
+          <input type="text" class="form-control" id="inputmitarbeitername" placeholder="Name">
+        </div>
+        <div class="mb-3">
+          <label class="form-check-label" for="Teilzeitcheck">Teilzeit</label>
+          <input type="checkbox" class="form-check-input" id="Teilzeitcheck">
+        </div>
+        <div class="mb-3">
+          <label for="inputstelle" class="form-label">Stelle</label>
+          <input type="text" class="form-control" id="inputstelle" placeholder="Stelle">
+        </div>
+        <div class="mb-3">
+          <label for="inputgeschlecht" class="form-label">Geschlecht</label>
+          <input type="text" class="form-control" id="inputgeschlecht" placeholder="Geschlecht">
+        </div>
+        <div class="mb-3">
+          <label for="inputgehalt" class="form-label">Gehalt (Brutto)</label>
+          <input type="number" class="form-control" id="inputgehalt" placeholder="Bruttogehalt">
+        </div>
+        <div class="mb-3">
+          <label for="inputqualis" class="form-label">Qualifikationen</label>
+          <input type="text" class="form-control" id="inputqualis" placeholder="Qualifikationen">
+        </div>
+        <div>
+          <button id="speichern" class="btn btn-primary">Speichern</button>
+          <button id="loeschen" class="btn btn-primary">Löschen</button>
+          <button id="datenloeschen" class="btn btn-primary">Daten löschen</button>
+        </div>
+        <br>
+          <table id="table">
+            <thead>
+              <tr>
+                <th>Nummer</th>
+                <th>Name</th>
+                <th>Teilzeit</th>
+                <th>Stelle</th>
+                <th>Geschlecht</th>
+                <th>Gehalt</th>
+                <th>Qualifikationen</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+<section th:replace="~{/masterpage/masterpage :: footer}"/>
+</body>
+<script src="../../static/EmployeeManagement/script.js"></script>
+
+</html>
