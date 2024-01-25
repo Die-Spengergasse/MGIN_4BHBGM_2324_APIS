@@ -6,6 +6,10 @@ import java.util.List;
 
 @Entity
 public class Patient {
+    public Long getId() {
+        return id;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
