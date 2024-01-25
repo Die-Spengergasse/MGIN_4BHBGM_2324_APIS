@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Medizinische Dokumente verwalten</title>
+</head>
+<body>
+<h1>Medizinische Dokumente verwalten</h1>
+
+<form action="speichern.php" method="post" enctype="multipart/form-data">
+  <label for="patientenname">Patientenname:</label>
+  <input type="text" id="patientenname" name="patientenname" required><br>
+
+  <label for="geburtsdatum">Geburtsdatum:</label>
+  <input type="date" id="geburtsdatum" name="geburtsdatum" required><br>
+
+  <label for="krankheit">Art der Krankheit:</label>
+  <input type="text" id="krankheit" name="krankheit" required><br>
+
+  <label for="dateiname">Dateiname:</label>
+  <input type="text" id="dateiname" name="dateiname" required><br>
+
+  <label for="art">Art des Dokuments:</label>
+  <select id="art" name="art" required>
+    <option value="Arztbericht">Arztbericht</option>
+    <option value="Röntgenbild">Röntgenbild</option>
+    <option value="Laborergebnisse">Laborergebnisse</option>
+    <option value="Sonstiges">Sonstiges</option>
+  </select><br>
+
+  <label for="datum">Datum:</label>
+  <input type="date" id="datum" name="datum"><br>
+
+  <label for="beschreibung">Beschreibung:</label><br>
+  <textarea id="beschreibung" name="beschreibung" rows="4" cols="50"></textarea><br>
+
+  <label for="datei">Dokument hochladen:</label>
+  <input type="file" id="datei" name="datei"><br>
+
+  <input type="submit" value="Speichern">
+</form>
+</body>
+</html>
