@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patientenformular</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <th:block th:insert="~{masterpage/masterpage :: assets}"/>
+    <style>
+        body {
+
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #879fb8;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 20px;
+        }
+
+        #patientForm {
+            width: 60%;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #patientForm label {
+            font-weight: bold;
+        }
+
+        #patientForm input[type="text"],
+        #patientForm input[type="date"],
+        #patientForm select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        #patientForm button {
+            background-color: #879fb8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .patient-list {
+            width: 40%;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .patient-list h2 {
+            font-size: 18px;
+            margin-top: 0;
+        }
+
+        .patient-list table {
+            width: 100%;
+        }
+
+        .patient-list th, .patient-list td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .patient-list th {
+            background-color: #879fb8;
+            color: white;
+        }
+
+        .patient-list tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{/masterpage/masterpage :: menu}"/>
+    <h1>Patientformular</h1>
+    
+    <div class="container">
+        <div id="patientForm">
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br>
+
+                <label for="surname">Surname:</label>
+                <input type="text" id="surname" name="surname" required><br>
+
+                <label>Gender:</label>
+                <br>
+                <input type="radio" id="male" name="gender" value="Männlich">
+                <label for="male">male</label><br>
+
+                <input type="radio" id="female" name="gender" value="Weiblich">
+                <label for="female">female</label><br>
+
+                <input type="radio" id="inter" name="gender" value="Inter">
+                <label for="inter">inter</label><br>
+                <br>
+
+                <label for="ssn">SSN:</label>
+                <input type="text" id="ssn" inputmode="numeric" pattern="[0-9]*" title="Bitte geben Sie nur Zahlen ein" required name="ssn"><br>
+
+                <label for="birthday">Birthday:</label>
+                <input type="date" id="birthday" name="birthday"><br>
+
+                <label for="healthInsurance">Health Insurance:</label>
+                <select id="healthInsurance" name="healthInsurance" size="1">
+                    <option value="" disabled selected>Select...</option>
+                    <option value="OEGK">ÖGK</option>
+                    <option value="SVS">SVS</option>
+                    <option value="BVAEB">BVAEB</option>
+                </select>
+
+                <button type="button" id="saveButton">Save</button>
+            </form>
+        </div>
+
+        <div class="patient-list">
+            <h2>Patientlist</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Birthday</th>
+                        <th>Action</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="patientList">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<script src="/patientdata/patientdata.js"></script>
+</body>
+</html>
