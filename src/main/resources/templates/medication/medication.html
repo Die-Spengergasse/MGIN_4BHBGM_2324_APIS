@@ -1,0 +1,98 @@
+<!--
+    First Created: 2024-01-18
+    Author: Carina Carmen Pirstl
+
+    Description:
+    ============
+    medication page
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medication</title>
+    <th:block th:insert="~{masterpage/masterpage :: assets}"/>
+</head>
+
+<body>
+<div th:replace="~{/masterpage/masterpage :: menu}"/>
+
+<header>
+    <h1>Medikationsliste</h1>
+</header>
+<div class="container">
+    <form id="medication-form">
+        <div class="form-group">
+            <label for="medication-name">Medikament Name:</label>
+            <select class="form-control" id="medication-name" name="medication-name" required>
+                <option value="" disabled selected> -Auswählen- </option>
+                <option value="Aspirin">Aspirin</option>
+                <option value="Ibuprofen">Ibuprofen</option>
+                <option value="Iberogast">Iberogast</option>
+                <option value="Antidepressiva">Antidepressiva</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="medicin-use">Medikament Verwendung:</label>
+            <input type="text" class="form-control" id="medicin-use" name="medicin-use" required>
+        </div>
+        <div class="form-group">
+            <label for="dosage">Dosierung (mg):</label>
+            <input type="number" class="form-control" id="dosage" name="dosage" required min="30">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="frequency">Häufigkeit:</label>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="morgens">
+                <label class="form-check-label">Morgens</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="mittags">
+                <label class="form-check-label">Mittags</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="abends">
+                <label class="form-check-label">Abends</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="nachts">
+                <label class="form-check-label">Nachts</label>
+            </div>
+            <br>
+        </div>
+        <div class="form-group">
+            <label for="start-date">Von Datum:</label>
+            <input type="date" class="form-control" id="start-date" name="start-date" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="end-date">Bis Datum:</label>
+            <input type="date" class="form-control" id="end-date" name="end-date" required>
+        </div>
+        <br>
+        <button type="button" id="add-medication-button" class="btn btn-primary">Hinzufügen</button>
+    </form>
+
+    <table class="table table-bordered mt-4">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Verwendung</th>
+            <th>Dosierung</th>
+            <th>Von</th>
+            <th>Bis</th>
+            <th>Häufigkeit</th>
+            <th>Aktionen</th>
+        </tr>
+        </thead>
+        <tbody id="medications-table-body"></tbody>
+    </table>
+</div>
+
+
+<section th:replace="~{/masterpage/masterpage :: footer}"/>
+</body>
+</html>
