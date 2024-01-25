@@ -42,7 +42,6 @@
                 <!--------------- menu items for all users (public) ---------------->
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/pub/welcome">Home</a></li>
-                    <li class="active"><a href="/doctor/ecgReports">Ecg-Report</a></li>
                 </ul>
 
                 <!--------------- menu items for admins ---------------->
@@ -52,8 +51,9 @@
 
                 <!--------------- menu items for doctors ---------------->
                 <ul class="nav navbar-nav" sec:authorize="hasRole('DOCTOR')">
+                    <li><a href="/doctor/doctorletter">Doctorletter</a></li>
                     <li><a href="/doctor/patients">Patients</a></li>
-                    <li class="active"><a href="doctor/ecgReports">Ecg-Report</a></li>
+                    <li class="active"><a href="/doctor/ecgReports">Ecg-Report</a></li>
                 </ul>
 
                 <!--------------- LOGO ---------------->
