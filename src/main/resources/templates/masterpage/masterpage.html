@@ -43,13 +43,17 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/pub/welcome">Home</a></li>
                 </ul>
+
+
+
+
                 <!--------------- menu items for admins ---------------->
                 <ul class="nav navbar-nav" sec:authorize="hasRole('ADMIN')">
-                    <li><a href="/admin/users">Users</a></li>
                 </ul>
                 <!--------------- menu items for doctors ---------------->
                 <ul class="nav navbar-nav" sec:authorize="hasRole('DOCTOR')">
                     <li><a href="/doctor/patients">Patients</a></li>
+                    <li><a href="/doctor/doctorletter">Doctorletter</a></li>
                 </ul>
 
                 <!--------------- LOGO ---------------->
