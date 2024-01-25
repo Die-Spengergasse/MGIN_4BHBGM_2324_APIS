@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Practice - Patient Data</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #0073e6;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    .search-bar input[type="text"] {
+        padding: 10px;
+        width: 70%; /* Adjust the width as needed */
+        border: 1px solid #ccc;
+        border-radius: 5px 0 0 5px; /* Rounded corners for the left side */
+        border-right: none;
+        display: inline-block; /* Display the input as inline-block */
+    }
+
+    /* CSS for search button */
+    .search-bar button {
+        padding: 10px 20px;
+        background-color: #2e86de;
+        color: white;
+        border: none;
+        border-radius: 0 5px 5px 0; /* Rounded corners for the right side */
+        cursor: pointer;
+        display: inline-block; /* Display the button as inline-block */
+    }
+
+
+    input[type="text"] {
+        padding: 10px;
+        width: 20%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        border-right: none;
+    }
+
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #0073e6;
+        color: #fff;
+    }
+
+    tr:hover {
+        background-color: #f2f2f2;
+    }
+    .logo{
+        font-size: 25px;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+
+    }
+    .navbar a{
+        font-size: 18px;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        margin: 0 20px;
+        transition: .3s;
+    }
+    .navbar a:hover{
+        color:  #67707a;;
+    }
+    .form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+
+    .label {
+        font-weight: bold;
+    }
+
+    .input[type="text"],
+    .input[type="number"],
+    .select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .select {
+        height: 40px;
+    }
+
+    .input[type="submit"] {
+        background-color: #0073e6;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .input[type="submit"]:hover {
+        background-color: #0059b3;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+
+    /* Stil für Labels */
+    label {
+        font-weight: bold;
+        display: block; /* Labels werden jetzt in einer neuen Zeile angezeigt */
+        margin-bottom: 10px; /* Abstand zwischen den Labels */
+    }
+
+    /* Stil für Eingabefelder */
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 90%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px; /* Abstand zwischen den Eingabefeldern */
+    }
+
+    select {
+        height: 40px;
+        width: 90%;
+    }
+
+    /* Stil für den Submit-Button */
+    input[type="submit"] {
+        background-color: #0073e6;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0059b3;
+    }
+
+
+</style>
+<body>
+<script src="@{}"></script>
+<header class="header">
+    <a href="laboratoryReport.html" class="logo">Laboratory Report</a>
+</header>
+<div class="form-container">
+    <div class="col-sm-4">
+        <form id="patientForm">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="id" required placeholder="">
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required placeholder="">
+
+            <label for="birthdate">Birth date:</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">male</option>
+                <option value="female">female</option>
+                <option value="other">other</option>
+            </select>
+
+            <form id="dataForm">
+                <label for="basophile">Basophile Granulozyten (BAS)</label>
+                <input type="text" id="basophile" name="basophile">
+
+                <label for="blasten">Blasten (BLA)</label>
+                <input type="text" id="blasten" name="blasten">
+
+                <label for="blutausstrich">Blutausstrich</label>
+                <input type="text" id="blutausstrich" name="blutausstrich">
+
+                <label for="baint">Blutausstrich Befundinterpretation (BAINT)</label>
+                <input type="text" id="baint" name="baint">
+
+                <label for="blutbild">Blutbild</label>
+                <input type="text" id="blutbild" name="blutbild">
+
+                <label for="blutfarbstoff">Blutfarbstoff roter</label>
+                <input type="text" id="blutfarbstoff" name="blutfarbstoff">
+
+                <label for="blutkörperchen_rot">Blutkörperchen rot</label>
+                <input type="text" id="blutkörperchen_rot" name="blutkörperchen_rot">
+
+                <label for="blutkörperchen_weiß">Blutkörperchen weiß</label>
+                <input type="text" id="blutkörperchen_weiß" name="blutkörperchen_weiß">
+
+                <label for="blutplättchen">Blutplättchen</label>
+                <input type="text" id="blutplättchen" name="blutplättchen">
+
+                <label for="weiße_blutkörperchen">Weiße Blutkörperchen</label>
+                <input type="text" id="weiße_blutkörperchen" name="weiße_blutkörperchen">
+
+                <label for="contact">Contact:</label>
+                <input type="text" id="contact" name="contact" required placeholder="">
+                <label for="file">Choose file</label>
+                <input type="file" id="file" name="file" accept=".pdf">
+
+            </form>
+
+            <button type="button" onclick="addOrUpdatePatient()">Add / Update</button>
+        </form>
+    </div>
+    <div class="col-sm-4">
+        <table id="patientTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Gender</th>
+                <th>Contact</th>
+                <th>File</th>
+                <th>Action</th>
+                <th>Basophile</th>
+                <th>Basophile Granulozyten (BAS)</th>
+                <th>Blasten (BLA)</th>
+                <th>Blood smear</th>
+                <th>Blood smear interpretation of findings (BAINT)</th>
+                <th>Blood count</th>
+                <th>Blood colour red</th>
+                <th>Blood corpuscles red</th>
+                <th>Blood corpuscles white</th>
+                <th>Blood platelets</th>
+                <th>White blood cells</th>
+            </thead>
+        </table>
+    </div>
+</div>
+</body>>
+</html>
