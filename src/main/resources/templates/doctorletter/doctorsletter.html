@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <th:block th:insert="~{masterpage/masterpage :: assets}"/>
+    <meta charset="UTF-8">
+    <!--<title>Arztbrief-Formular</title>-->
+    <style>
+        header {
+            width: 100%;
+        }
+        body {
+            width: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            /*align-items: center;*/
+            min-height: 100vh;
+        }
+
+        /*h1 {
+            background-color: cornflowerblue;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+            width: 100%;
+        }
+        */
+
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px 0;
+            align-items: center;
+        }
+
+        #form-container,
+        #table-container {
+            width: 100%;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            /*margin-bottom: 20px;*/
+            align-items: center;
+            margin: auto;
+        }
+
+        #table-container table {
+            width: 100%;
+            max-height: 800px;
+            border-collapse: collapse;
+            overflow: auto;
+            align-items: center;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            align-items: center;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            align-items: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            align-items: center;
+        }
+
+        .edit-button,
+        input[type="submit"] {
+            background-color: cornflowerblue;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            align-items: center;
+        }
+
+        .edit-button:hover,
+        input[type="submit"]:hover {
+            background-color: #23527c;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: cornflowerblue;
+            align-items: center;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+<div th:replace="~{/masterpage/masterpage :: menu}" />
+
+<div class="container" id="form-container" >
+    <form id="arztbrief-form" >
+        <label for="patientenname">Patientenname:</label>
+        <input type="text" id="patientenname" name="patientenname" required>
+        <label for="nachname">Nachname:</label>
+        <input type="text" id="nachname" name="nachname" required>
+        <label for="geburtstag">Geburtsdatum:</label>
+        <input type="text" id="geburtstag" name="geburtstag" required>
+        <label for="svnr">Sozialversicherungsnummer (SVNR):</label>
+        <input type="text" id="svnr" name="svnr" required>
+        <label for="diagnose">Diagnose:</label>
+        <textarea id="diagnose" name="diagnose" rows="4" required></textarea>
+        <label for="medikamente">Medikamente benötigt:</label>
+        <select id="medikamente" name="medikamente">
+            <option value="auswaehlen">Bitte auswählen</option>
+            <option value="nein">Nein</option>
+            <option value="ja">Ja</option>
+        </select>
+        <label for="medikament">Medikament (falls erforderlich):</label>
+        <input type="text" id="medikament" name="medikament">
+        <input type="submit" value="Arztbrief erstellen" class="edit-button">
+    </form>
+</div>
+<br>
+<br>
+
+<div class="container" id="table-container">
+    <table id="patient-table">
+        <thead>
+        <tr>
+            <th>Patientenname</th>
+            <th>Nachname</th>
+            <th>Geburtsdatum</th>
+            <th>SVNR</th>
+            <th>Diagnose</th>
+            <th>Medikament</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <button class="edit-button" id="edit-button" style="display: none;">Tabelle bearbeiten</button>
+
+</div>
+<script src="/doctorletter/doctorletter.js">
+
+</script>
+<section th:replace="~{/masterpage/masterpage :: footer}"/>
+</body>
+
+
+</html>
