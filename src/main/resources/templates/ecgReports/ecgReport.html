@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patienteninformation</title>
+    <th:block th:insert="~{masterpage/masterpage :: assets}"/>
+    <link rel="stylesheet" type="text/css" href="/ecgReports/ecgReport.css">
+</head>
+<body>
+<div th:replace="~{/masterpage/masterpage :: menu}"/>
+
+<div class="container">
+    <form id="patient-form">
+        <div class="form-row">
+            <label for="vorname">Vorname:</label>
+            <input type="text" id="vorname" placeholder="Max" required>
+        </div>
+        <div class="form-row">
+            <label for="nachname">Nachname:</label>
+            <input type="text" id="nachname" placeholder="Mustermann" required>
+        </div>
+        <div class="form-row">
+            <label for="geburtsdatum">Geburtsdatum:</label>
+            <input type="date" id="geburtsdatum" required>
+        </div>
+
+        <div class="form-row">
+            <label for="svnr">SVNR:</label>
+            <input type="number" id="svnr" placeholder="6134010199" required>
+        </div>
+        <div class="form-row">
+            <label for="geschlecht">Geschlecht:</label>
+            <select id="geschlecht" required>
+                <option value="männlich">Männlich</option>
+                <option value="weiblich">Weiblich</option>
+                <option value="divers">Divers</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label for="alter">Alter:</label>
+            <input type="number" id="alter" placeholder="38" required>
+        </div>
+
+        <div class="separator"></div>
+        <div class="container2">
+            <div class="selection-container">
+                <label for="klinik">Klinik auswählen:</label>
+                <select id="klinik">
+                    <option value="Klinik Ottakring">Klinik Ottakring</option>
+                    <option value="Klinik Favoriten">Klinik Favoriten</option>
+                    <option value="Klinik Floridsdorf">Klinik Floridsdorf</option>
+                    <option value="Klinik Döbling">Klinik Döbling</option>
+                </select>
+            </div>
+            <div class="selection-container">
+                <label for="ekg-art">Art der EKG auswählen:</label>
+                <select id="ekg-art">
+                    <option value="Langzeit-EKG">Langzeit-EKG</option>
+                    <option value="Belastungs-EKG">Belastungs-EKG</option>
+                    <option value="Ruhe-EKG">Ruhe-EKG</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+        <h2>Aufzeichnung</h2>
+        <div class="form-row">
+            <label for="aufzeichnung-start">Start:</label>
+            <input type="datetime-local" id="aufzeichnung-start" required>
+        </div>
+        <div class="form-row">
+            <label for="aufzeichnung-ende">Ende:</label>
+            <input type="datetime-local" id="aufzeichnung-ende" required>
+        </div>
+        <div class="form-row label-dauer">
+            <label for="dauer">Dauer:</label>
+            <input type="text" id="dauer" placeholder="0 Minuten" readonly>
+        </div>
+        <div class="separator"></div>
+        <div class="form-row">
+            <label for="bild">Bild hochladen:</label>
+            <input type="file" id="bild" name="bild" accept="image/*">
+        </div>
+
+        <input class="speichern-button" type="button" id="speichern" value="Speichern"/>
+    </form>
+</div>
+
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>SVNR</th>
+        </tr>
+        </thead>
+        <tbody id="patient-list"></tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <input class="ueberarbeiten-button" type="button" id="bearbeiten" value="Überarbeiten">
+    <input class="loeschen-button" type="button" id="loeschen" value="Löschen">
+    <br>
+</div>
+<br>
+<br>
+<br>
+<br>
+<section th:replace="~{/masterpage/masterpage :: footer}"/>
+
+<script src="/ecgReports/ecgReport.js"></script>
+</body>
+</html>
