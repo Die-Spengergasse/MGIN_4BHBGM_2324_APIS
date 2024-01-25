@@ -1,9 +1,18 @@
 package at.spengergasse.med_px.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 public class Reservation {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
