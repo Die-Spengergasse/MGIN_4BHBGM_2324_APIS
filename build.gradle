@@ -28,7 +28,7 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
 
     compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.proje  ctlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('bootBuildImage') {
