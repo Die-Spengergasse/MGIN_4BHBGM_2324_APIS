@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <th:block th:insert="~{masterpage/masterpage :: assets}"/>
+</head>
+<body>
+<div th:replace="~{/masterpage/masterpage :: menu}"/>
+<h1>Reinigung</h1>
+
+<form method ="post" action ="https://example.com/">
+
+
+    <div class = "form-row">
+        <fieldset>
+            <label for="exampleDataList" >Station</label>
+            <input class="col" list="datalistOptions" id="exampleDataList">
+            <datalist id="datalistOptions">
+                <option value="Innere Medizin">
+                <option value="Allgemein-und Viszeralchirurgie">
+                <option value="Anästhesie und operative Intensivmedizin">
+                <option value="Gastroenterologie, Hepatologie und Endokokrinologie">
+                <option value="Geriatrie und Geriatrische Rehabilitation">
+                <option value="Gynäkologie und Geburtshilfe">
+                <option value="Hämatologie, Onkologie und Palliativmedizin">
+                <option value="Herz- und Gefäßchirurgie">
+                <option value="Kardiologie und Angiologie">
+                <option value="Klinische Akut- und Notfallmedizin">
+                <option value="Apotheke">
+                <option value="Naturheilkunde und integrative Medizin">
+                <option value="Orthopädie und Unfallchirurgie">
+                <option value="Präventivmedizin">
+                <option value="Radiologie und Nuklearmedizin">
+                <option value="Pathologie">
+            </datalist>
+
+            <label for = "Stock" class = "form-label">Stock:</label>
+            <select class ="col form-control-sm" id="Stock">
+                <option selected>Auswählen...</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+            </select>
+
+            <label for ="Raumnummer">Raumnummer:</label>
+            <input class ="col"type ="text" id="Raumnummer">
+
+
+        </fieldset>
+    </div>
+    <br>
+    <div class = "form-row">
+        <label for ="Datum">Datum:</label>
+        <input type ="date" id ="Datum">
+
+        <label for ="Zeit">Zeit:</label>
+        <input type ="time" id = "Zeit">
+    </div>
+    <br>
+    <div class = "form-row">
+        <label for = "Reinigungskraft">Reinigungskraft:</label>
+        <select id="Reinigungskraft">
+            <option selected>Auswählen...</option>
+            <option value ="Lisa">Lisa</option>
+            <option value="Manfred">Manfred</option>
+            <option value="Tom">Tom</option>
+        </select>
+    </div>
+    <br>
+    <div class = "form-row">
+
+        <textarea name="Dokumentation" rows="10" cols="30" placeholder="Dokumentation" id ="Dokumentation"></textarea>
+    </div>
+    <br>
+
+    <div class = "form-row">
+        <input type = "button" value = "Speichern" id ="Speichern">
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+
+    <tbody id="data"></tbody>
+    </thead>
+</table>
+
+<br><br>
+<section th:replace="~{/masterpage/masterpage :: footer}"/>
+</body>
+
+<script>
+    // const array = [];
+
+    // Überprüfen, ob Daten im lokalen Speicher vorhanden sind
+    const gespeicherteDaten = localStorage.getItem('cleaningData');
+    const array = gespeicherteDaten ? JSON.parse(gespeicherteDaten) : [];
+
+    let Speichern = document.querySelector("#Speichern");
+    let EditIndex = -1;
+
+    // Funktion zum Befüllen der Eingabefelder mit Daten zum Bearbeiten
+    function editRow(index) {
+        const rowData = array[index];
+        document.querySelector("#exampleDataList").value = rowData.Station;
+        document.querySelector("#Stock").value = rowData.Stock;
+        document.querySelector("#Raumnummer").value = rowData.Raumnummer;
+        document.querySelector("#Datum").value = rowData.Datum;
+        document.querySelector("#Zeit").value = rowData.Zeit;
+        document.querySelector("#Reinigungskraft").value = rowData.Reinigungskraft;
+        document.querySelector("#Dokumentation").value = rowData.Dokumentation;
+        EditIndex = index;
+    }
+
+    function updateTable() {
+        const data = document.querySelector("#data");
+        data.innerHTML = ""; // Leeren Sie den Inhalt der Tabelle
+
+        // Fügen Sie die Überschriftenzeile hinzu
+        const headerRow = data.insertRow();
+        headerRow.insertCell().innerText = "Station";
+        headerRow.insertCell().innerText = "Stock";
+        headerRow.insertCell().innerText = "Raumnummer";
+        headerRow.insertCell().innerText = "Datum";
+        headerRow.insertCell().innerText = "Zeit";
+        headerRow.insertCell().innerText = "Reinigungskraft";
+        headerRow.insertCell().innerText = "Dokumentation";
+        headerRow.insertCell().innerText = "Bearbeiten";
+
+        // Fügen Sie Datenzeilen hinzu
+        for (let i = 0; i < array.length; i++) {
+            const a = array[i];
+            const row = data.insertRow();
+            row.insertCell().innerText = a.Station;
+            row.insertCell().innerText = a.Stock;
+            row.insertCell().innerText = a.Raumnummer;
+            row.insertCell().innerText = a.Datum;
+            row.insertCell().innerText = a.Zeit;
+            row.insertCell().innerText = a.Reinigungskraft;
+            row.insertCell().innerText = a.Dokumentation;
+            const editCell = row.insertCell();
+            const editButton = document.createElement("button");
+            editButton.innerText = "Bearbeiten";
+            editButton.addEventListener("click", function () {
+                editRow(i);
+            });
+            editCell.appendChild(editButton);
+        }
+    }
+    function saveToLocalStorage() {
+        localStorage.setItem('cleaningData', JSON.stringify(array));
+    }
+
+    //Event-Listener für "Speichern"
+    Speichern.addEventListener("click", function () {
+        console.log("Speichern-Button geklickt");
+
+        const obj = {};
+        obj.Station = document.querySelector("#exampleDataList").value;
+        obj.Stock = document.querySelector("#Stock").value;
+        obj.Raumnummer = document.querySelector("#Raumnummer").value;
+        obj.Datum = document.querySelector("#Datum").value;
+        obj.Zeit = document.querySelector("#Zeit").value;
+        obj.Reinigungskraft = document.querySelector("#Reinigungskraft").value;
+        obj.Dokumentation = document.querySelector("#Dokumentation").value;
+
+        if (EditIndex === -1) {
+            array.push(obj);
+        } else {
+            array[EditIndex] = obj;
+            EditIndex = -1;
+        }
+
+        updateTable(); // Aktualisieren Sie die Tabelle
+
+        // Zurücksetzen der Eingabefelder
+        document.querySelector("#exampleDataList").value = "";
+        document.querySelector("#Stock").value = "Auswählen...";
+        document.querySelector("#Raumnummer").value = "";
+        document.querySelector("#Datum").value = "";
+        document.querySelector("#Zeit").value = "";
+        document.querySelector("#Reinigungskraft").value = "Auswählen...";
+        document.querySelector("#Dokumentation").value = "";
+
+        saveToLocalStorage();
+        console.log(array);
+    });
+
+    // Initialisieren Sie die Tabelle
+    updateTable();
+</script>
+
+
+
+
+</html>
