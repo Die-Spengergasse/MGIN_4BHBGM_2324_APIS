@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:insert="~{masterpage/masterpage :: assets}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eeecec;
+            min-height: 1100px;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #c60f0f;
+            color: #f4f0f0;
+            padding: 20px;
+            margin: 0;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.285);
+        }
+
+        label {
+            font-weight: bold;
+
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="tel"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+
+
+        input[type="submit"] {
+            background-color: #c60f0f;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #7f0d0d;
+        }
+        .personData {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            max-width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #c60f0f;
+            color: #fff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        @media screen and (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+
+
+            th {
+                text-align: center;
+            }
+
+            tbody tr {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            tbody tr:nth-child(even) {
+                background-color: transparent;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                padding: 20px;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            input[type="tel"],
+            input[type="email"] {
+                padding: 8px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+                padding: 10px;
+            }
+
+
+
+            form {
+                padding: 10px;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            input[type="tel"],
+            input[type="email"] {
+                padding: 6px;
+                width: 200px;
+            }
+
+            input[type="submit"] {
+                padding: 8px 16px;
+                width: 200px;
+            }
+
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div th:replace="~{/masterpage/masterpage :: menu}"/>
+<h1>Contact Information</h1>
+<form method="post" id="contactForm">
+    <label for="salutation">Salutation:</label><br>
+    <select id="salutation" name="salutation">
+        <option value="Mr.">Mr.</option>
+        <option value="Ms.">Ms.</option>
+    </select><br>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="address1">Address 1:</label>
+    <input type="text" id="address1" name="address1" required><br>
+
+    <label for="address2">Address 2:</label>
+    <input type="text" id="address2" name="address2"><br>
+
+    <label for="plz1">PLZ1:</label>
+    <input type="text" id="plz1" name="plz1" required><br>
+
+    <label for="plz2">PLZ2:</label>
+    <input type="text" id="plz2" name="plz2"><br>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" required><br>
+
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" required><br>
+
+    <label for="phone2">Phone 2:</label>
+    <input type="tel" id="phone2" name="phone2"><br>
+
+    <label for="email1">First email:</label>
+    <input type="email" id="email1" name="email1" required><br>
+
+    <label for="email2">Second email:</label>
+    <input type="email" id="email2" name="email2"><br>
+
+    <label for="birthdate">Birthdate:</label>
+    <input type="date" id="birthdate" name="birthdate" required><br>
+
+    <input type="submit" value="Submit" id="submitButton">
+</form>
+
+<table border="1" id="dataTable">
+    <thead>
+    <tr>
+        <th>Salutation</th>
+        <th>Name</th>
+        <th>Address 1</th>
+        <th>Address 2</th>
+        <th>PLZ1</th>
+        <th>PLZ2</th>
+        <th>City</th>
+        <th>Phone</th>
+        <th>Phone 2</th>
+        <th>Email 1</th>
+        <th>Email 2</th>
+        <th>Birthdate</th>
+        <td><button class="editButton" onclick="editRow(this)">Edit</button></td>
+    </tr>
+    </thead>
+    <tbody id="dataBody"></tbody>
+</table>
+<section th:replace="~{/masterpage/masterpage :: footer}"/>
+<script>
+    const submitButton = document.getElementById("submitButton");
+    const dataBody = document.getElementById("dataBody");
+    const contactForm = document.getElementById("contactForm");
+
+    submitButton.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        let salutation = document.querySelector("#salutation").value;
+        let name = document.querySelector("#name").value;
+        let address1 = document.querySelector("#address1").value;
+        let address2 = document.querySelector("#address2").value;
+        let plz1 = document.querySelector("#plz1").value;
+        let plz2 = document.querySelector("#plz2").value;
+        let city = document.querySelector("#city").value;
+        let phone = document.querySelector("#phone").value;
+        let phone2 = document.querySelector("#phone2").value;
+        let email1 = document.querySelector("#email1").value;
+        let email2 = document.querySelector("#email2").value;
+        let birthdate = document.querySelector("#birthdate").value;
+
+        const array = [];
+        const Personendaten = {};
+
+        Personendaten.salutation = salutation;
+        Personendaten.name = name;
+        Personendaten.address1 = address1;
+        Personendaten.address2 = address2;
+        Personendaten.plz1 = plz1;
+        Personendaten.plz2 = plz2;
+        Personendaten.city = city;
+        Personendaten.phone = phone;
+        Personendaten.phone2 = phone2;
+        Personendaten.email1 = email1;
+        Personendaten.email2 = email2;
+        Personendaten.birthdate = birthdate;
+
+        array.push(Personendaten);
+
+        console.log(array);
+
+        const jsonString = JSON.stringify(array);
+        localStorage.setItem("data", jsonString);
+
+        const str = localStorage.getItem("data");
+        const parsedData = JSON.parse(str);
+        console.log(parsedData);
+        const row = dataBody.insertRow(-1);
+
+        const rowData = [
+            salutation, name, address1, address2, plz1, plz2, city, phone, phone2, email1, email2, birthdate
+        ];
+
+        for (let i = 0; i < rowData.length; i++) {
+            const cell = row.insertCell(i);
+            cell.textContent = rowData[i];
+        }
+
+        const editCell = row.insertCell(rowData.length);
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.classList.add("editButton");
+        editButton.onclick = function () {
+            editRow(this);
+        };
+
+        editCell.appendChild(editButton);
+        contactForm.reset();
+
+        function editRow(button) {
+            const selectedRow = button.parentNode.parentNode;
+            const cells = selectedRow.getElementsByTagName("td");
+
+            document.querySelector("#salutation").value = cells[0].textContent;
+            document.querySelector("#name").value = cells[1].textContent;
+            document.querySelector("#address1").value = cells[2].textContent;
+            document.querySelector("#address2").value = cells[3].textContent;
+            document.querySelector("#plz1").value = cells[4].textContent;
+            document.querySelector("#plz2").value = cells[5].textContent;
+            document.querySelector("#city").value = cells[6].textContent;
+            document.querySelector("#phone").value = cells[7].textContent;
+            document.querySelector("#phone2").value = cells[8].textContent;
+            document.querySelector("#email1").value = cells[9].textContent;
+            document.querySelector("#email2").value = cells[10].textContent;
+            document.querySelector("#birthdate").value = cells[11].textContent;
+
+            dataBody.removeChild(selectedRow);
+        }
+    });
+
+    function displayStoredData() {
+        const storedData = localStorage.getItem("data");
+
+        dataBody.innerHTML = "";
+
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+
+            parsedData.forEach(personData => {
+                const row = dataBody.insertRow(-1);
+
+                const rowData = Object.values(personData);
+
+                for (let i = 0; i < rowData.length; i++) {
+                    const cell = row.insertCell(i);
+                    cell.textContent = rowData[i];
+                }
+
+                const editCell = row.insertCell(rowData.length);
+                const editButton = document.createElement("button");
+                editButton.textContent = "Edit";
+                editButton.classList.add("editButton");
+                editButton.onclick = function () {
+                    editRow(this);
+                };
+                editCell.appendChild(editButton);
+            });
+        }
+    }
+
+    displayStoredData();
+</script>
+
+</body>
+</html>
